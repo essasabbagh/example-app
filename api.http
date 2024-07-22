@@ -1,0 +1,26 @@
+# POST http://127.0.0.1:8000/api/register HTTP/1.1
+# content-type: application/json
+# Accept: application/json
+
+# {
+#     "name": "isa sabbagh",
+#     "email": "isa@example.com",
+#     "password": "password",
+#     "password_confirmation": "password"
+# }
+
+
+# POST http://127.0.0.1:8000/api/login HTTP/1.1
+# Accept: application/json
+# {
+#     "email": "isa@example.com",
+#     "password": "password",
+# }
+
+# POST http://127.0.0.1:8000/api/logout HTTP/1.1
+# Authorization: Bearer 1|BZkUNSOAChsE4xOz4wMG43TvWmq1wHJxGgye7SOwf7bda362
+
+# profile
+GET http://127.0.0.1:8000/api/profile HTTP/1.1
+Accept: application/json
+Authorization: Bearer 2|OCWllPTxk8rhfVAPzp5Plfbci188EN1KGp6gFFNxca5939b9
