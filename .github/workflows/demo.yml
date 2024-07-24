@@ -37,7 +37,7 @@ jobs:
             cd oxygendevs.net
             cd public_html/laravel/
             git pull
-            php composer.phar install
+            php composer2 install
             php artisan migrate --force
       # - name: Install SSH key
       #   run: |
