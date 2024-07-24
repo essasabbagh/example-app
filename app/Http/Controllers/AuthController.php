@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Mail\WelcomeEmail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
@@ -23,6 +25,9 @@ class AuthController extends Controller
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
         ]);
+
+        // Send the welcome email
+        Mail::to($user->email)->send(new WelcomeEmail($user));
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
