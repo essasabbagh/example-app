@@ -1,0 +1,267 @@
+{
+	"info": {
+		"_postman_id": "43b1cec2-7848-40ce-8974-2ed011276ea3",
+		"name": "Laravel API Authentication",
+		"description": "A collection for testing Laravel API authentication endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "33048824-43b1cec2-7848-40ce-8974-2ed011276ea3"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"id": "50350d09-ffac-4491-9f89-acbcbba7ca17",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"test sabbagh\",\n    \"email\": \"essasabbagh@gmail.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"id": "83696eba-d534-4cbf-8633-070d618a8d9f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"isa@example.com\",\n    \"password\": \"password\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"id": "f041ba26-16bb-4995-9a71-56f86b8462c9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{auth_token}}",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/logout",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Profile",
+			"id": "cc0516a2-3a33-45e0-bd6c-edcbd4efa3d0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "8|u9WN71l1PE5CLck3Sby8SPUxO1tvhD3cyPnF5xYE28829375",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{auth_token}}",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/profile",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Avatar",
+			"id": "b0bd0b22-204d-445c-afce-4ef0d7e37f00",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "avatar",
+							"type": "file",
+							"src": "/Users/essasabbagh/Downloads/WhatsApp Image 2024-06-11 at 12.12.08 PM.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/user/avatar",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user",
+						"avatar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Avatar",
+			"id": "1923f9ef-45b2-4c4f-9e40-6e897b0c1656",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/user/avatar",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user",
+						"avatar"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "14|cGv3jym0HQYWsMQP9KAURwI097Nqvu42bgdb3DFjc7275a45",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "b74135cc-f1c1-4a6d-93f4-7d036e6a6da1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e4f759b2-3397-46e9-8c2a-2b415aa37c28",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "edb3929f-802b-42ef-861f-e6f81ee30b72",
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000/api",
+			"type": "string"
+		}
+	]
+}
