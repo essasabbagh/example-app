@@ -37,10 +37,10 @@ jobs:
             cd oxygendevs.net
             cd public_html/laravel/
             git pull
-            php ~/composer.phar install
-            php artisan key:generate --ansi
-            php artisan storage:link
-            php artisan migrate --force
+            /opt/alt/php83/usr/bin/php ~/composer.phar install
+            /opt/alt/php83/usr/bin/php artisan key:generate --ansi
+            /opt/alt/php83/usr/bin/php artisan storage:link
+            /opt/alt/php83/usr/bin/php artisan migrate --force
       # - name: Install SSH key
       #   run: |
       #     mkdir -p ~/.ssh/
