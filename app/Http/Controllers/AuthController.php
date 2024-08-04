@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmail;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Mail\WelcomeEmail;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -27,7 +29,7 @@ class AuthController extends Controller
         ]);
 
         // Send the welcome email
-        Mail::to($user->email)->send(new WelcomeEmail($user));
+        dispatch(new SendEmail($user));
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -43,11 +45,13 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
+
+        dispatch(new SendEmail($user));
 
         $token = $user->createToken('auth_token')->plainTextToken;
 

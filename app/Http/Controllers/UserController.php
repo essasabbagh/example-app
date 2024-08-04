@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
-use Intervention\Image\Laravel\Facades\Image;
+// use Intervention\Image\Laravel\Facades\Image;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
@@ -38,7 +38,7 @@ class UserController extends Controller
             $disk = 'public';
     
             // Debug: Log the file path and disk being used
-            Log::info('Checking file path: ' . $filePath . ' on disk: ' . $disk);
+            // Log::info('Checking file path: ' . $filePath . ' on disk: ' . $disk);
     
             // Check if the file exists on the specified disk
             if (Storage::disk($disk)->exists($filePath)) {

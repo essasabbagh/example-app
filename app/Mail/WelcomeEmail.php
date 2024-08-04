@@ -31,7 +31,7 @@ class WelcomeEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Welcome to Our Application')
+        return $this->subject('Welcome to OxygenDevs')
                     ->view('emails.welcome');
     }
 }
