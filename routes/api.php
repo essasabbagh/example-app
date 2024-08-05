@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EnrollmentController;
@@ -22,6 +23,7 @@ Route::middleware(['auth:sanctum', 'throttle:api'])
     });
 
 Route::middleware('auth:sanctum')->group(function () {
+
     Route::get('/courses', [CourseController::class, 'index']);
     Route::post('/courses', [CourseController::class, 'store']);
     Route::get('/courses/{course}', [CourseController::class, 'show']);
@@ -30,11 +32,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/courses/{course}/enroll', [EnrollmentController::class, 'enroll']);
     Route::post('/courses/{course}/unenroll', [EnrollmentController::class, 'unenroll']);
-});
 
+    Route::post('/courses/{course}/certificate', [CertificateController::class, 'generateCertificate']);
+    Route::get('/certificates/{certificate}/download', [CertificateController::class, 'downloadCertificate']);
 
-
-Route::middleware('auth:sanctum')->group(function () {
     // Quiz routes
     Route::get('/quizzes', [QuizController::class, 'index']);
     Route::post('/quizzes', [QuizController::class, 'store']);
@@ -52,4 +53,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/exams/{exam}', [ExamController::class, 'show']);
     Route::put('/exams/{exam}', [ExamController::class, 'update']);
     Route::delete('/exams/{exam}', [ExamController::class, 'destroy']);
+
 });
