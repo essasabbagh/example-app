@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\TeacherResource\Pages;
+use App\Filament\Resources\TeacherResource\RelationManagers;
+use App\Filament\Resources\TeacherResource\RelationManagers\CoursesRelationManager;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
@@ -12,10 +13,9 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class UserResource extends Resource
+class TeacherResource extends Resource
 {
     protected static ?string $model = User::class;
 
@@ -23,6 +23,9 @@ class UserResource extends Resource
 
     protected static ?string $navigationGroup = 'Users';
 
+    protected static ?string $navigationLabel = 'Teachers';
+
+    protected static ?string $modelLabel = 'Teachers';
 
     public static function form(Form $form): Form
     {
@@ -44,13 +47,20 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->query(
+                User::whereHas(
+                    'roles',
+                    function ($q) {
+                        $q->where('name', 'Teacher');
+                    }
+                )
+            )
             ->columns([
                 Tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('roles.name')
-                    ->sortable(),
+            
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable()
@@ -80,47 +90,16 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CoursesRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => Pages\ListTeachers::route('/'),
+            'create' => Pages\CreateTeacher::route('/create'),
+            'edit' => Pages\EditTeacher::route('/{record}/edit'),
         ];
     }
-
-    // enable global search on your model, 
-    // you must set a title attribute for your resource
-    protected static ?string $recordTitleAttribute = 'name';
-
-    // return a plain text string or Htmlable
-    public static function getGlobalSearchResultTitle(Model $record): string
-    {
-        return $record->name;
-    }
-
-    // search across multiple columns of your resource
-    public static function getGloballySearchableAttributes(): array
-    {
-        return ['name', 'email'];
-    }
-
-    // display "details" below their title
-    public static function getGlobalSearchResultDetails(Model $record): array
-    {
-        return [
-            // 'name' => $record->name,
-            'email' => $record->email,
-        ];
-    }
-
-    // // category and author of the record will be displayed in the search result
-    // public static function getGlobalSearchEloquentQuery(): Builder
-    // {
-    //     return parent::getGlobalSearchEloquentQuery()->with(['name', 'email']);
-    // }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('content');
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
             $table->foreignId('section_id')->constrained()->onDelete('cascade');
+            // $table->unsignedBigInteger('course_id')->nullable();
 
             // $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             // $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');

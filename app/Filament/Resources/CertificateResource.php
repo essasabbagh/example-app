@@ -17,7 +17,7 @@ class CertificateResource extends Resource
 {
     protected static ?string $model = Certificate::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -31,6 +31,7 @@ class CertificateResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('certificate_url')
                     ->required(),
+
             ]);
     }
 
@@ -38,9 +39,9 @@ class CertificateResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('student.name')
                     ->sortable(),
+
                 Tables\Columns\TextColumn::make('course.title')
                     ->numeric()
                     ->sortable(),

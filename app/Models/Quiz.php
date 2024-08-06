@@ -40,4 +40,33 @@ class Quiz extends Model
     {
         return $this->belongsTo(Section::class);
     }
+
+    public function grade(array $answers)
+    {
+        $totalQuestions = $this->questions()->count();
+
+        if ($totalQuestions === 0) {
+            return [
+                'score' => 0,
+                'passed' => false,
+                'message' => 'No questions found in this quiz.'
+            ];
+        }
+
+        $correctAnswers = 0;
+
+        foreach ($this->questions as $question) {
+            if (isset($answers[$question->id]) && $answers[$question->id] == $question->correct_answer) {
+                $correctAnswers++;
+            }
+        }
+
+        $score = ($correctAnswers / $totalQuestions) * 100;
+        $passed = $score >= 70; // Example passing score threshold
+
+        return [
+            'score' => $score,
+            'passed' => $passed,
+        ];
+    }
 }

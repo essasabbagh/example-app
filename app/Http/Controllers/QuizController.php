@@ -61,4 +61,20 @@ class QuizController extends Controller
 
         return response()->json(null, 204);
     }
+
+    public function attempt(Request $request, Quiz $quiz)
+    {
+        // Logic to handle the quiz attempt
+        $validated = $request->validate([
+            'answers' => 'required|array',
+        ]);
+
+        // Example of grading the quiz
+        $result = $quiz->grade($validated['answers']);
+
+        return response()->json([
+            'score' => $result['score'],
+            'passed' => $result['passed'],
+        ], 200);
+    }
 }

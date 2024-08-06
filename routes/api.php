@@ -7,10 +7,14 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QuizAttemptController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SectionController;
+// use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
@@ -19,10 +23,33 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 Route::middleware(['auth:sanctum', 'throttle:api'])
     ->group(function () {
         Route::get('/profile', [UserController::class, 'profile']);
+        Route::get(
+            '/roles',
+            function (Request $request) {
+                $user = $request->user();
+                $user->load('roles');
+                return response()->json($user);
+            }
+        );
+        Route::post(
+            '/assign-role',
+            function (Request $request) {
+                $user = $request->user();
+                $user->assignRole('Admin');
+                $user->load('roles');
+                return response()->json($user);
+            }
+        );
+
         Route::get('/user/avatar', [UserController::class, 'getAvatar']);
         Route::post('/user/avatar', [UserController::class, 'uploadAvatar']);
         // Other protected routes
     });
+
+Route::group(['middleware' => ['role:admin']], function () {
+    // Routes for admin only
+});
+
 
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -35,6 +62,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/courses/{course}/enroll', [EnrollmentController::class, 'enroll']);
     Route::post('/courses/{course}/unenroll', [EnrollmentController::class, 'unenroll']);
 
+    Route::post('/courses/{course}/sections', [SectionController::class, 'store']);
+    Route::get('/courses/{course}/sections', [SectionController::class, 'index']);
+
+    Route::post('/sections/{section}/complete', [SectionController::class, 'completeSection']);
+    Route::post('/sections/{section}/lessons', [LessonController::class, 'store']);
+    Route::get('/sections/{section}/lessons', [LessonController::class, 'index']);
+
     Route::post('/courses/{course}/certificate', [CertificateController::class, 'generateCertificate']);
     Route::get('/certificates/{certificate}/download', [CertificateController::class, 'downloadCertificate']);
 
@@ -44,6 +78,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/quizzes/{quiz}', [QuizController::class, 'show']);
     Route::put('/quizzes/{quiz}', [QuizController::class, 'update']);
     Route::delete('/quizzes/{quiz}', [QuizController::class, 'destroy']);
+    Route::post('/quizzes/{quiz}/attempt', [QuizController::class, 'attempt']);
 
     // Quiz attempt routes
     Route::post('/quizzes/{quiz}/attempts', [QuizAttemptController::class, 'store']);
@@ -58,6 +93,4 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     Route::get('/reports/student/{student}/progress', [ReportController::class, 'generateStudentProgressReport']);
-
-    Route::post('/sections/{section}/complete', [SectionController::class, 'completeSection']);
 });

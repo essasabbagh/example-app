@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Section;
 use App\Models\SectionProgress;
 use App\Models\User;
@@ -9,6 +10,25 @@ use Illuminate\Http\Request;
 
 class SectionController extends Controller
 {
+    public function index(Course $course)
+    {
+        $sections = $course->sections;
+
+        return response()->json($sections);
+    }
+
+    public function store(Request $request, Course $course)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        $section = $course->sections()->create($validated);
+
+        return response()->json($section, 201);
+    }
+
     public function completeSection(Request $request, Section $section)
     {
         $user = $request->user(); // Assuming you have user authentication
