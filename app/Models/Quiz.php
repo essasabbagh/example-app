@@ -32,7 +32,12 @@ class Quiz extends Model
     public function students(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'quiz_attempts')
-                    ->withPivot('score')
-                    ->withTimestamps();
+            ->withPivot('score')
+            ->withTimestamps();
+    }
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuizAttemptController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SectionController;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
@@ -57,4 +58,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     Route::get('/reports/student/{student}/progress', [ReportController::class, 'generateStudentProgressReport']);
+
+    Route::post('/sections/{section}/complete', [SectionController::class, 'completeSection']);
 });

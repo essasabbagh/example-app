@@ -63,7 +63,12 @@ class User extends Authenticatable
     public function quizzes(): BelongsToMany
     {
         return $this->belongsToMany(Quiz::class, 'quiz_attempts')
-                    ->withPivot('score')
-                    ->withTimestamps();
+            ->withPivot('score')
+            ->withTimestamps();
+    }
+
+    public function sectionProgress()
+    {
+        return $this->hasMany(SectionProgress::class);
     }
 }
