@@ -9,6 +9,7 @@ use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuizAttemptController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\ReportController;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
@@ -54,4 +55,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/exams/{exam}', [ExamController::class, 'update']);
     Route::delete('/exams/{exam}', [ExamController::class, 'destroy']);
 
+
+    Route::get('/reports/student/{student}/progress', [ReportController::class, 'generateStudentProgressReport']);
 });

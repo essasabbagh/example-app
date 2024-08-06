@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quiz;
+use App\Notifications\QuizNotification;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -22,7 +23,19 @@ class QuizController extends Controller
 
         $quiz = Quiz::create($request->all());
 
-        return response()->json($quiz, 201);
+        // Notify all students enrolled in the course
+        $course = $quiz->course;
+        $students = $course->students;
+
+        foreach ($students as $student) {
+            $student->notify(new QuizNotification($quiz, $course));
+        }
+
+        // return response()->json($quiz, 201);
+        return response()->json([
+            'data' =>  $quiz,
+            'message' => 'Quiz created and students notified'
+        ], 201);
     }
 
     public function show(Quiz $quiz)
