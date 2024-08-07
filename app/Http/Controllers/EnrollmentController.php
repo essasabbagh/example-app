@@ -28,21 +28,6 @@ class EnrollmentController extends Controller
         return response()->json(['message' => 'Successfully enrolled in the course.'], 200);
     }
 
-    // public function unenroll(Request $request, Course $course)
-    // {
-    //     $user = Auth::user();
-
-    //     // Ensure the user is enrolled in the course
-    //     if (!$user->enrolledCourses()->where('course_id', $course->id)->exists()) {
-    //         return response()->json(['message' => 'Not enrolled in this course.'], 400);
-    //     }
-
-    //     // Unenroll the user
-    //     $user->enrolledCourses()->detach($course->id);
-
-    //     return response()->json(['message' => 'Successfully unenrolled from the course.'], 200);
-    // }
-
     public function unenroll(Request $request, Course $course)
     {
         $user = Auth::user();
