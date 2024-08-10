@@ -19,6 +19,7 @@ class UserController extends Controller
         $avatarUrl = $user->avatar ? Storage::url($user->avatar) : null;
 
         return response()->json([
+            'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
             'avatar_url' => $request->root() . $avatarUrl,   // Include the avatar URL
