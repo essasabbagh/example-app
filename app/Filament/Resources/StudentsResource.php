@@ -2,19 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\StudentsResource\Pages;
-use App\Filament\Resources\StudentsResource\RelationManagers;
-use App\Filament\Resources\StudentsResource\RelationManagers\CoursesRelationManager;
-use App\Models\Students;
-use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\User;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\StudentsResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\StudentsResource\RelationManagers;
+use App\Filament\Resources\StudentsResource\RelationManagers\EnrollmentsRelationManager;
 
 class StudentsResource extends Resource
 {
@@ -63,7 +62,7 @@ class StudentsResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('email'),
-            
+
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable()
@@ -93,7 +92,7 @@ class StudentsResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CoursesRelationManager::class,
+            EnrollmentsRelationManager::class,
         ];
     }
 

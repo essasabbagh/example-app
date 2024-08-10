@@ -10,9 +10,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CoursesRelationManager extends RelationManager
+class EnrollmentsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'courses';
+    protected static string $relationship = 'enrolledCourses';
 
     public function form(Form $form): Form
     {

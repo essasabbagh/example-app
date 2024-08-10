@@ -21,6 +21,9 @@ class SectionsRelationManager extends RelationManager
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Textarea::make('description')
+                    ->columnSpanFull(),
+
             ]);
     }
 

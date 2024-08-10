@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->unsignedBigInteger('course_id');
-            $table->timestamps();
-
             // Foreign key constraint
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
