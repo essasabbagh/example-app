@@ -31,7 +31,7 @@ class SectionController extends Controller
 
     public function completeSection(Request $request, Section $section)
     {
-        $user = $request->user(); // Assuming you have user authentication
+        $user = $request->user();
 
         $progress = SectionProgress::firstOrCreate([
             'user_id' => $user->id,

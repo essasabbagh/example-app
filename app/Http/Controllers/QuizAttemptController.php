@@ -6,13 +6,12 @@ use App\Models\QuizAttempt;
 use App\Models\QuizAnswer;
 use App\Models\QuizQuestion;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class QuizAttemptController extends Controller
 {
     public function store(Request $request, Quiz $quiz)
     {
-        $user = Auth::user();
+        $user = $request->user();
 
         // Create a quiz attempt
         $quizAttempt = QuizAttempt::create([

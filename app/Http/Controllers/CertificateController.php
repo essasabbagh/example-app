@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Certificate;
 use App\Models\Course;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Certificate;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
 
 class CertificateController extends Controller
 {
-    public function generateCertificate(Course $course)
+    public function generateCertificate(Request $request, Course $course)
     {
-        $user = Auth::user();
+        $user = $request->user();
 
         // Check if the user has completed the course (you can add your own logic here)
         $courseCompleted = true; // Replace with actual course completion check

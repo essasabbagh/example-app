@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Enrollment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class EnrollmentController extends Controller
 {
     public function enroll(Request $request, Course $course)
     {
-        $user = Auth::user();
+        $user = $request->user();
 
         // Ensure the user is not already enrolled
         if ($user->enrolledCourses()->where('course_id', $course->id)->exists()) {
@@ -30,7 +29,7 @@ class EnrollmentController extends Controller
 
     public function unenroll(Request $request, Course $course)
     {
-        $user = Auth::user();
+        $user = $request->user();
 
         // Ensure the user is enrolled in the course
         $enrollment = Enrollment::where('user_id', $user->id)
