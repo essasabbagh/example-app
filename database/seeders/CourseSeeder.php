@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Course;
+use Database\Factories\CourseFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -24,6 +25,8 @@ class CourseSeeder extends Seeder
             Course::factory(rand(3, 5))->create([
                 'teacher_id' => $teacher->id, // Assuming the Course model has a 'teacher_id' foreign key
             ]);
+
+            CourseFactory::new()->count(10)->create();
         });
 
 
