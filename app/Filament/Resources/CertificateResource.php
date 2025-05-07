@@ -2,16 +2,13 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CertificateResource\Pages;
-use App\Filament\Resources\CertificateResource\RelationManagers;
-use App\Models\Certificate;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Models\Certificate;
+use Filament\Resources\Resource;
+use App\Filament\Resources\CertificateResource\Pages;
 
 class CertificateResource extends Resource
 {

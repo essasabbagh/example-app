@@ -1,10 +1,7 @@
 <?php
 
-use App\Enums\ErrorType;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Route;
-use App\Exceptions\CustomJsonException;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuizController;
@@ -12,7 +9,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ReportController;
-// use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\CertificateController;

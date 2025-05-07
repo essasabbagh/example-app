@@ -1,0 +1,38 @@
+{
+    "recommendations": [
+        // // Laravel-specific extensions
+        // "onecentlin.laravel5-snippets",
+        // "onecentlin.laravel-blade",
+        // "ryannaddy.laravel-artisan",
+
+        // // PHP development
+        // "bmewburn.vscode-intelephense-client",
+        // "felixfbecker.php-pack",
+        // "neilbrayfield.php-docblocker",
+
+        // // Debugging
+        // "felixfbecker.php-debug",
+
+        // // Frontend tools (if using Vue/React with Laravel)
+        // "octref.vetur", // For Vue.js
+        // "dbaeumer.vscode-eslint", // ESLint for JavaScript
+        // "esbenp.prettier-vscode", // Prettier for code formatting
+
+        // // Database tools
+        // "mtxr.sqltools", // SQL Tools for database management
+        // "mtxr.sqltools-driver-mysql", // MySQL driver for SQL Tools
+
+        // // Git integration
+        // "eamodio.gitlens",
+
+        // // Project navigation
+        // "donjayamanne.githistory", // Git history viewer
+        // "gruntfuggly.todo-tree", // Highlight TODOs in your code
+
+        // // Environment management
+        // "mikestead.dotenv", // .env file support
+
+        // Testing (if using PHPUnit)
+        // "recca0120.vscode-phpunit" // PHPUnit test runner
+    ]
+}
